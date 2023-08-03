@@ -29,7 +29,7 @@ def speech_text(data: RequestData):
     audio_list = data.audio_list
     wav_file_path = data.wav_file_path
     samplerate = data.samplerate
-    audio_np = np.array(audio_list)
+    audio_np = np.array(audio_list).astype(np.int16)
     sf.write(wav_file_path, audio_np, samplerate=samplerate)
     recognized_text = speech_to_text(wav_file_path)
     return {"recognized_text": recognized_text}
