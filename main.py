@@ -23,9 +23,7 @@ def speech_to_text(wav_filename):
     return recognized_text
 
 @app.post("/")
-# def speech_text(audio_list , wav_file_path: str , samplerate: int):
 def speech_text(data: RequestData):
-    # audio_np = np.array(audio_list)
     audio_list = data.audio_list
     wav_file_path = data.wav_file_path
     samplerate = data.samplerate
@@ -33,5 +31,3 @@ def speech_text(data: RequestData):
     sf.write(wav_file_path, audio_np, samplerate=samplerate)
     recognized_text = speech_to_text(wav_file_path)
     return {"recognized_text": recognized_text}
-    # username = "あなたの名前は「」です。"
-    # return {"message": f"User: {username}"}
