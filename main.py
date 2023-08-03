@@ -17,7 +17,7 @@ def speech_to_text(wav_filename):
     return recognized_text
 
 @app.get("/")
-def speech_text(audio_list: list , wav_file_path: str , samplerate: int):
+def speech_text(audio_list , wav_file_path: str , samplerate: int):
     audio_np = np.array(audio_list)
     sf.write(wav_file_path, audio_np, samplerate=samplerate)
     recognized_text = speech_to_text(wav_file_path)
