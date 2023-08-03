@@ -3,12 +3,6 @@ import soundfile as sf
 import speech_recognition as sr
 from speech_recognition import UnknownValueError
 import numpy as np
-from pydantic import BaseModel
-
-class RequestData(BaseModel):
-  audio_list: list
-  wav_file_path: str
-  samplerate: int
 
 app = FastAPI()
 
@@ -22,12 +16,9 @@ def speech_to_text(wav_filename):
         recognized_text = ""
     return recognized_text
 
-@app.get("/")
-def speech_text(data: RequestData):
-    audio_list = data.audio_list
-    wav_file_path = data.wav_file_path
-    samplerate = data.samplerate
-    # audio_np = np.array(audio_list)
+@app.post("/")
+def speech_text(audio_list , wav_file_path: str , samplerate: int):
+    audio_np = np.array(audio_list)
     # sf.write(wav_file_path, audio_np, samplerate=samplerate)
     # recognized_text = speech_to_text(wav_file_path)
     # return {"recognized_text": recognized_text}
